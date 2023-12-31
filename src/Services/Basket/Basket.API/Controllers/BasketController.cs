@@ -7,7 +7,7 @@ namespace Basket.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class BasketController(IBasketRepository repository) : ControllerBase
+    public class BasketController(IBasketRepository repository, GrpcServices.DiscountGrpcService discountGrpcService) : ControllerBase
     {
         [HttpGet("{username}", Name = "GetBasket")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ShoppingCart))]
@@ -21,6 +21,11 @@ namespace Basket.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ShoppingCart))]
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket)
         {
+            foreach (var item in basket.Items)
+            {
+                var coupon = await discountGrpcService.GetDiscount(item.ProductName);
+                item.Price -= coupon.Amount;
+            }
             return Ok(await repository.UpdateBasket(basket));
         }
 
