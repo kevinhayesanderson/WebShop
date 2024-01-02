@@ -1,7 +1,7 @@
-
 using Basket.API.GrpcServices;
 using Basket.API.Repositories;
 using Discount.Grpc.Protos;
+using MassTransit;
 using Microsoft.OpenApi.Models;
 
 namespace Basket.API
@@ -22,17 +22,29 @@ namespace Basket.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
             });
 
+            //redis
             builder.Services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = builder.Configuration["CacheSettings:ConnectionString"];
             });
 
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+            builder.Services.AddAutoMapper(typeof(Program));
 
+            //grpc
             builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
                 (o => o.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]));
 
             builder.Services.AddScoped<DiscountGrpcService>();
+
+            // MassTransit-RabbitMQ Configuration
+            builder.Services.AddMassTransit(config => 
+            {
+                config.UsingRabbitMq((ctx, cfg) => 
+                {
+                    cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+                });
+            });
 
             var app = builder.Build();
 
