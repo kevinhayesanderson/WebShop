@@ -22,10 +22,10 @@ namespace Ordering.API
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
             var app = builder.Build();
-            await app.MigrateDatabase<OrderContext>(async (context, services) =>
+            await app.MigrateDatabase<OrderContext>((context, services) =>
             {
                 var logger = services.GetService<ILogger<OrderContextSeed>>();
-                await OrderContextSeed.SeedAsync(context, logger);
+                OrderContextSeed.SeedAsync(context, logger).Wait();
             });
 
             // Configure the HTTP request pipeline.
