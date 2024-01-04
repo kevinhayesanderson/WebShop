@@ -1,4 +1,3 @@
-
 using Catalog.API.Data;
 using Catalog.API.Repositories;
 using Microsoft.OpenApi.Models;
@@ -35,7 +34,6 @@ namespace Catalog.API
             }
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -38,9 +38,9 @@ namespace Basket.API
             builder.Services.AddScoped<DiscountGrpcService>();
 
             // MassTransit-RabbitMQ Configuration
-            builder.Services.AddMassTransit(config => 
+            builder.Services.AddMassTransit(config =>
             {
-                config.UsingRabbitMq((ctx, cfg) => 
+                config.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
                 });

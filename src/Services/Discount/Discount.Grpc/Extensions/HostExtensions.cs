@@ -4,7 +4,7 @@ namespace Discount.Grpc.Extensions
 {
     public static class HostExtensions
     {
-        public async static Task<IHost> MigrateDatabase<TContext>(this IHost host, int? retry = 0)
+        public static async Task<IHost> MigrateDatabase<TContext>(this IHost host, int? retry = 0)
         {
             int retryForAvailability = retry ?? 0;
 
@@ -29,7 +29,7 @@ namespace Discount.Grpc.Extensions
                     command.CommandText = "DROP TABLE IF EXISTS Coupon";
                     command.ExecuteNonQuery();
 
-                    command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, 
+                    command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY,
                                                                 ProductName VARCHAR(24) NOT NULL,
                                                                 Description TEXT,
                                                                 Amount INT)";

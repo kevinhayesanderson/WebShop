@@ -62,6 +62,5 @@ namespace Catalog.API.Controllers
         {
             return Ok(await _repository.DeleteProduct(id));
         }
-
     }
 }

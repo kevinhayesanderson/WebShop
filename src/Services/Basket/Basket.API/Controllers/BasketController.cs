@@ -49,7 +49,7 @@ namespace Basket.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
         {
-            // get existing basket with total price 
+            // get existing basket with total price
             // Create basketCheckoutEvent -- Set TotalPrice on basketCheckout eventMessage
             // send checkout event to rabbitmq
             // remove the basket
@@ -64,7 +64,7 @@ namespace Basket.API.Controllers
             // send checkout event to rabbitmq
             var eventMessage = mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMessage.TotalPrice = basket.TotalPrice;
-            
+
             await publishEndpoint.Publish(eventMessage);
 
             // remove the basket

@@ -5,7 +5,7 @@ namespace Ordering.API.Extensions
 {
     public static class HostExtensions
     {
-        public async static Task<IHost> MigrateDatabase<TContext>(this IHost host,
+        public static async Task<IHost> MigrateDatabase<TContext>(this IHost host,
                                             Action<TContext, IServiceProvider> seeder,
                                             int? retry = 0) where TContext : DbContext
         {

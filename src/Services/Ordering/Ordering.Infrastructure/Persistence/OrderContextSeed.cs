@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Ordering.Domain.Entities;
 
 namespace Ordering.Infrastructure.Persistence
@@ -38,7 +37,7 @@ namespace Ordering.Infrastructure.Persistence
                    PaymentMethod = 1,
                     CreatedDate = DateTime.Now,
                         CreatedBy = "kevin",
-                       
+
                     LastModifiedDate = DateTime.Now,
                         LastModifiedBy = "kevin",
                 }

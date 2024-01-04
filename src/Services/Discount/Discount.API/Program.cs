@@ -1,4 +1,3 @@
-
 using Discount.API.Extensions;
 using Discount.API.Repositories;
 using Microsoft.OpenApi.Models;
@@ -10,7 +9,6 @@ namespace Discount.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
 
             // Add services to the container.
 

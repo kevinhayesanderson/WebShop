@@ -8,7 +8,6 @@ namespace Ordering.Infrastructure.Persistence
     {
         public OrderContext(DbContextOptions<OrderContext> options) : base(options)
         {
-
         }
 
         public DbSet<Order> Orders { get; set; }
@@ -25,6 +24,7 @@ namespace Ordering.Infrastructure.Persistence
                         entry.Entity.LastModifiedDate = DateTime.Now;
                         entry.Entity.LastModifiedBy = "kevin";
                         break;
+
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
                         entry.Entity.LastModifiedBy = "kevin";
@@ -34,6 +34,5 @@ namespace Ordering.Infrastructure.Persistence
 
             return base.SaveChangesAsync(cancellationToken);
         }
-
     }
 }
