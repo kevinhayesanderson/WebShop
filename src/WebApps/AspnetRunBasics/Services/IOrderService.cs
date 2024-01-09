@@ -1,6 +1,4 @@
 ﻿using AspnetRunBasics.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace AspnetRunBasics.Services
 {
@@ -8,5 +6,4 @@ namespace AspnetRunBasics.Services
     {
         Task<IEnumerable<OrderResponseModel>> GetOrdersByUserName(string userName);
     }
-
 }

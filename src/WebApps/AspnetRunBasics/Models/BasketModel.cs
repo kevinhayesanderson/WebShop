@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace AspnetRunBasics.Models
+﻿namespace AspnetRunBasics.Models
 {
     public class BasketModel
     {
